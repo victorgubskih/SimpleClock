@@ -19,6 +19,7 @@ class ViewController: UIViewController {
         simpleClokView.layer.borderWidth = 2
         simpleClokView.layer.borderColor = UIColor.black.cgColor
         
+        
         simpleClokView.layer.cornerRadius = simpleClokView.frame.size.height / 2
         
     }

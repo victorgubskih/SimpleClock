@@ -11,6 +11,9 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var simpleClokView: UIView!
     
+   
+    @IBOutlet weak var handClock: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
       

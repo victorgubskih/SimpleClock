@@ -11,46 +11,48 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var simpleClokView: UIView!
     
-   
-    @IBOutlet weak var twelfLabel: UILabel!
-    
-    @IBOutlet weak var nineLabel: UILabel!
-    
-    @IBOutlet weak var sixLabel: UILabel!
-    
-    @IBOutlet weak var threeLabel: UILabel!
-    
-    @IBOutlet weak var centerLabel: UILabel!
-    
-   
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-       // someCode
-        //centerLabel.center = simpleClokView.center
+      
         simpleClokView.center = view.center
         simpleClokView.layer.borderWidth = 2
         simpleClokView.layer.borderColor = UIColor.black.cgColor
        
-        
-        
         simpleClokView.layer.cornerRadius = simpleClokView.frame.size.height / 2
-       
-        twelfLabel.frame.origin.y = 5
-        twelfLabel.center.x = simpleClokView.frame.size.width / 2
-        
-        
-        sixLabel.frame.origin.y = simpleClokView.frame.height - sixLabel.frame.height - 5
-        sixLabel.center.x = simpleClokView.frame.size.width / 2
-        
-        nineLabel.frame.origin.x = 0
-        nineLabel.center.y = simpleClokView.frame.size.height / 2
-        
-        threeLabel.frame.origin.x = simpleClokView.frame.width - threeLabel.frame.width
-        threeLabel.center.y = simpleClokView.frame.size.height / 2
+      
+        createObjectsAroundCircle()
     }
+    
+    func createObjectsAroundCircle() {
 
+        let center = CGPoint(x: simpleClokView.bounds.width/2 ,y: simpleClokView.bounds.height/2)
+        
+        let radius : CGFloat = 100
+        let count = 12
+
+        var angle = CGFloat(2 * Double.pi - Double.pi / 3)
+        let step = CGFloat(2 * Double.pi) / CGFloat(count)
+
+        for  index in  0..<count {
+            
+            let x = cos(angle) * radius + center.x
+            let y = sin(angle) * radius + center.y
+        
+
+            let label = UILabel()
+            label.text = "\(index + 1)"
+           
+            label.font = UIFont(name: "Arial", size: 20)
+            label.textColor = UIColor.black
+            label.sizeToFit()
+            
+            label.center = CGPoint(x: x, y: y)
+            
+            simpleClokView.addSubview(label)
+            angle += step
+        }
+    }
 }
+
+
 

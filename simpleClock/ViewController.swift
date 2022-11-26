@@ -54,6 +54,13 @@ class ViewController: UIViewController {
             simpleClokView.addSubview(label)
             angle += step
         }
+
+        let x = handClock.bounds.width / 4
+        let y = handClock.bounds.height / 2
+        var transform = CGAffineTransform(translationX: x, y: y)
+        transform = transform.rotated(by: step)
+        transform = transform.translatedBy(x: -x, y: -y)
+        handClock.transform = transform
     }
 }
 

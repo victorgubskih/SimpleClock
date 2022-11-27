@@ -54,11 +54,16 @@ class ViewController: UIViewController {
             simpleClokView.addSubview(label)
             angle += step
         }
-
+        moviHandClock(handCount: 10)
+        
+    }
+    func moviHandClock(handCount: Int) {
+        let count = 12
+        let step = CGFloat(2 * Double.pi) / CGFloat(count)
         let x = handClock.bounds.width / 4
         let y = handClock.bounds.height / 2
         var transform = CGAffineTransform(translationX: x, y: y)
-        transform = transform.rotated(by: step)
+        transform = transform.rotated(by: CGFloat(handCount) * step)
         transform = transform.translatedBy(x: -x, y: -y)
         handClock.transform = transform
     }

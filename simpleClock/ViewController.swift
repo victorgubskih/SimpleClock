@@ -11,12 +11,18 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var simpleClokView: UIView!
     
+   @IBOutlet weak var handClock: UIView!
    
-    @IBOutlet weak var handClock: UIView!
+    @IBOutlet weak var handClockMinute: UIView!
+   
+    @IBOutlet weak var nameClockSeconds: UIView!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+        simpleClokView.translatesAutoresizingMaskIntoConstraints = false
+        
         simpleClokView.center = view.center
         simpleClokView.layer.borderWidth = 2
         simpleClokView.layer.borderColor = UIColor.black.cgColor
@@ -54,18 +60,41 @@ class ViewController: UIViewController {
             simpleClokView.addSubview(label)
             angle += step
         }
-        moviHandClock(handCount: 10)
+        movHourClock(hourCount: 10)
+        movMinutesClock(minutesCount: 20)
+        movSecondsClock(secondsCount: 15)
         
     }
-    func moviHandClock(handCount: Int) {
-        let count = 12
-        let step = CGFloat(2 * Double.pi) / CGFloat(count)
+    func movHourClock(hourCount: Int) {
+        let count1 = 12
+        let step = CGFloat(2 * Double.pi) / CGFloat(count1)
         let x = handClock.bounds.width / 4
         let y = handClock.bounds.height / 2
         var transform = CGAffineTransform(translationX: x, y: y)
-        transform = transform.rotated(by: CGFloat(handCount) * step)
+        transform = transform.rotated(by: CGFloat(hourCount) * step)
         transform = transform.translatedBy(x: -x, y: -y)
         handClock.transform = transform
+    }
+    func movMinutesClock(minutesCount: Int) {
+        let count2 = 60
+        let step = CGFloat(2 * Double.pi) / CGFloat(count2)
+        let x = handClockMinute.bounds.width / 4
+        let y = handClockMinute.bounds.height / 2
+        var transform = CGAffineTransform(translationX: x, y: y)
+        transform = transform.rotated(by: CGFloat(minutesCount) * step)
+        transform = transform.translatedBy(x: -x, y: -y)
+        handClockMinute.transform = transform
+    }
+    
+    func movSecondsClock(secondsCount: Int) {
+        let count3 = 60
+        let step = CGFloat(2 * Double.pi) / CGFloat(count3)
+        let x = nameClockSeconds.bounds.width / 4
+        let y = nameClockSeconds.bounds.height / 2
+        var transform = CGAffineTransform(translationX: x, y: y)
+        transform = transform.rotated(by: CGFloat(secondsCount) * step)
+        transform = transform.translatedBy(x: -x, y: -y)
+        nameClockSeconds.transform = transform
     }
 }
 

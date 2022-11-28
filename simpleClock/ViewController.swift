@@ -60,12 +60,14 @@ class ViewController: UIViewController {
             simpleClokView.addSubview(label)
             angle += step
         }
-        movHourClock(hourCount: 10)
-        movMinutesClock(minutesCount: 20)
-        movSecondsClock(secondsCount: 15)
+       /* movHourClock(hourCount: 5)
+        movMinutesClock(minutesCount: 30)
+        movSecondsClock(secondsCount: 45)*/
+        
+        movenmetOfThreeHands(count: Int, index: Int, handView: UIView)
         
     }
-    func movHourClock(hourCount: Int) {
+   /* func movHourClock(hourCount: Int) {
         let count1 = 12
         let step = CGFloat(2 * Double.pi) / CGFloat(count1)
         let x = handClock.bounds.width / 4
@@ -95,7 +97,19 @@ class ViewController: UIViewController {
         transform = transform.rotated(by: CGFloat(secondsCount) * step)
         transform = transform.translatedBy(x: -x, y: -y)
         nameClockSeconds.transform = transform
+    } */
+    
+    func movenmetOfThreeHands(count: Int, index: Int, handView: UIView) {
+       
+        let step = CGFloat(2 * Double.pi) / CGFloat(count)
+        let x = handView.bounds.width / 4
+        let y = handView.bounds.height / 2
+        var transform = CGAffineTransform(translationX: x, y: y)
+        transform = transform.rotated(by: CGFloat(index) * step)
+        transform = transform.translatedBy(x: -x, y: -y)
+        handView.transform = transform
     }
+    
 }
 
 

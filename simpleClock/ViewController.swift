@@ -16,8 +16,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var handClockMinute: UIView!
    
     @IBOutlet weak var nameClockSeconds: UIView!
+    var dataPicker = UIDatePicker()
     
-    
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +29,13 @@ class ViewController: UIViewController {
         simpleClokView.layer.borderColor = UIColor.black.cgColor
        
         simpleClokView.layer.cornerRadius = simpleClokView.frame.size.height / 2
+       
+       
+        dataPicker.frame = CGRect(x: 0, y: 40, width: 200, height: 50)
+        dataPicker.center.x = simpleClokView.center.x
+        dataPicker.preferredDatePickerStyle = .compact
+        dataPicker.datePickerMode = .time 
+        view.addSubview(dataPicker)
       
         createObjectsAroundCircle()
     }
@@ -64,7 +72,9 @@ class ViewController: UIViewController {
         movMinutesClock(minutesCount: 30)
         movSecondsClock(secondsCount: 45)*/
         
-        movenmetOfThreeHands(count: Int, index: Int, handView: UIView)
+        movenmetOfThreeHands(count: 12, index: 10, handView: handClock)
+        movenmetOfThreeHands(count: 60, index: 15, handView: handClockMinute)
+        movenmetOfThreeHands(count: 60, index: 35, handView: nameClockSeconds)
         
     }
    /* func movHourClock(hourCount: Int) {

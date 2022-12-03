@@ -16,7 +16,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var handClockMinute: UIView!
    
     @IBOutlet weak var nameClockSeconds: UIView!
-    var dataPicker = UIDatePicker()
+  
+    var datePicker = UIDatePicker()
+    
+    
     
    
     
@@ -31,12 +34,17 @@ class ViewController: UIViewController {
         simpleClokView.layer.cornerRadius = simpleClokView.frame.size.height / 2
        
        
-        dataPicker.frame = CGRect(x: 0, y: 40, width: 200, height: 50)
-        dataPicker.center.x = simpleClokView.center.x
-        dataPicker.preferredDatePickerStyle = .compact
-        dataPicker.datePickerMode = .time 
-        view.addSubview(dataPicker)
-      
+        datePicker.frame = CGRect(x: 0, y: 40, width: 200, height: 50)
+        datePicker.center.x = simpleClokView.center.x
+        datePicker.preferredDatePickerStyle = .compact
+        datePicker.datePickerMode = .time 
+        view.addSubview(datePicker)
+        
+        datePicker.addTarget(self, action: #selector(timeChanged(_:)), for: .valueChanged)
+        
+       
+        
+        
         createObjectsAroundCircle()
     }
     
@@ -118,6 +126,14 @@ class ViewController: UIViewController {
         transform = transform.rotated(by: CGFloat(index) * step)
         transform = transform.translatedBy(x: -x, y: -y)
         handView.transform = transform
+    }
+    
+    @objc func timeChanged(_ datePicker: UIDatePicker) {
+        let date = datePicker.date
+        let components = Calendar.current.dateComponents([.hour, .minute, .second], from: date)
+        movenmetOfThreeHands(count: 12, index: components.hour ?? 0, handView: handClock)
+        movenmetOfThreeHands(count: 60, index: components.minute ?? 0, handView: handClockMinute)
+        movenmetOfThreeHands(count: 60, index: components.second ?? 0, handView: nameClockSeconds)
     }
     
 }

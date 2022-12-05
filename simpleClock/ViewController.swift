@@ -20,8 +20,9 @@ class ViewController: UIViewController {
   
     var datePicker = UIDatePicker()
     var timer = Timer()
+    var timer1 = Timer()
     var second = 0
-    
+    var minute = 0
     
    
     
@@ -47,6 +48,7 @@ class ViewController: UIViewController {
         datePicker.addTarget(self, action: #selector(timeChanged(_:)), for: .valueChanged)
         
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+        timer1 = Timer.scheduledTimer(timeInterval: 60.0, target: self, selector: #selector(timerAction1), userInfo: nil, repeats: true)
         
         
         createObjectsAroundCircle()
@@ -82,8 +84,8 @@ class ViewController: UIViewController {
         }
       
         
-        movenmetOfThreeHands(count: 12, index: 5, handView: handClock)
-        movenmetOfThreeHands(count: 60, index: 30, handView: handClockMinute)
+        movenmetOfThreeHands(count: 12, index: 1, handView: handClock)
+        movenmetOfThreeHands(count: 60, index: minute, handView: handClockMinute)
         movenmetOfThreeHands(count: 60, index: second, handView: nameClockSeconds)
         
     }
@@ -109,6 +111,10 @@ class ViewController: UIViewController {
     @objc func timerAction(){
         second += 1
         movenmetOfThreeHands(count: 60, index: second, handView: nameClockSeconds)
+    }
+    @objc func timerAction1(){
+    minute += 1
+    movenmetOfThreeHands(count: 60, index: minute, handView: handClockMinute)
     }
 }
 

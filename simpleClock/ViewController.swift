@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Foundation
 
 class ViewController: UIViewController {
     
@@ -18,7 +19,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var nameClockSeconds: UIView!
   
     var datePicker = UIDatePicker()
-    
+    var timer = Timer()
+    var second = 0
     
     
    
@@ -36,13 +38,15 @@ class ViewController: UIViewController {
        
         datePicker.frame = CGRect(x: 0, y: 40, width: 200, height: 50)
         datePicker.center.x = simpleClokView.center.x
+        datePicker.center.y = simpleClokView.center.y
+        
         datePicker.preferredDatePickerStyle = .compact
         datePicker.datePickerMode = .time 
         view.addSubview(datePicker)
         
         datePicker.addTarget(self, action: #selector(timeChanged(_:)), for: .valueChanged)
         
-       
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
         
         
         createObjectsAroundCircle()
@@ -76,47 +80,14 @@ class ViewController: UIViewController {
             simpleClokView.addSubview(label)
             angle += step
         }
-       /* movHourClock(hourCount: 5)
-        movMinutesClock(minutesCount: 30)
-        movSecondsClock(secondsCount: 45)*/
+      
         
-        movenmetOfThreeHands(count: 12, index: 10, handView: handClock)
-        movenmetOfThreeHands(count: 60, index: 15, handView: handClockMinute)
-        movenmetOfThreeHands(count: 60, index: 35, handView: nameClockSeconds)
+        movenmetOfThreeHands(count: 12, index: 5, handView: handClock)
+        movenmetOfThreeHands(count: 60, index: 30, handView: handClockMinute)
+        movenmetOfThreeHands(count: 60, index: second, handView: nameClockSeconds)
         
     }
-   /* func movHourClock(hourCount: Int) {
-        let count1 = 12
-        let step = CGFloat(2 * Double.pi) / CGFloat(count1)
-        let x = handClock.bounds.width / 4
-        let y = handClock.bounds.height / 2
-        var transform = CGAffineTransform(translationX: x, y: y)
-        transform = transform.rotated(by: CGFloat(hourCount) * step)
-        transform = transform.translatedBy(x: -x, y: -y)
-        handClock.transform = transform
-    }
-    func movMinutesClock(minutesCount: Int) {
-        let count2 = 60
-        let step = CGFloat(2 * Double.pi) / CGFloat(count2)
-        let x = handClockMinute.bounds.width / 4
-        let y = handClockMinute.bounds.height / 2
-        var transform = CGAffineTransform(translationX: x, y: y)
-        transform = transform.rotated(by: CGFloat(minutesCount) * step)
-        transform = transform.translatedBy(x: -x, y: -y)
-        handClockMinute.transform = transform
-    }
-    
-    func movSecondsClock(secondsCount: Int) {
-        let count3 = 60
-        let step = CGFloat(2 * Double.pi) / CGFloat(count3)
-        let x = nameClockSeconds.bounds.width / 4
-        let y = nameClockSeconds.bounds.height / 2
-        var transform = CGAffineTransform(translationX: x, y: y)
-        transform = transform.rotated(by: CGFloat(secondsCount) * step)
-        transform = transform.translatedBy(x: -x, y: -y)
-        nameClockSeconds.transform = transform
-    } */
-    
+ 
     func movenmetOfThreeHands(count: Int, index: Int, handView: UIView) {
        
         let step = CGFloat(2 * Double.pi) / CGFloat(count)
@@ -135,7 +106,10 @@ class ViewController: UIViewController {
         movenmetOfThreeHands(count: 60, index: components.minute ?? 0, handView: handClockMinute)
         movenmetOfThreeHands(count: 60, index: components.second ?? 0, handView: nameClockSeconds)
     }
-    
+    @objc func timerAction(){
+        second += 1
+        movenmetOfThreeHands(count: 60, index: second, handView: nameClockSeconds)
+    }
 }
 
 

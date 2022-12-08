@@ -117,13 +117,15 @@ class ViewController: UIViewController {
         second += 1
         movenmetOfThreeHands(count: 60, index: second, handView: nameClockSeconds)
     }
+   
     @objc func timerAction1(){
-    minute += 1
-    movenmetOfThreeHands(count: 60, index: minute, handView: handClockMinute)
+        minute += 1
+        movenmetOfThreeHands(count: 60, index: minute, handView: handClockMinute)
     }
+   
     @objc func timerAction2(){
-    minute += 1
-    movenmetOfThreeHands(count: 360, index: hour, handView: handClock)
+        hour += 1
+        movenmetOfThreeHands(count: 12, index: hour, handView: handClock)
     }
 }
 

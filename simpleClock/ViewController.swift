@@ -53,7 +53,7 @@ class ViewController: UIViewController {
         
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
         timer1 = Timer.scheduledTimer(timeInterval: 60.0, target: self, selector: #selector(timerAction1), userInfo: nil, repeats: true)
-        timer2 = Timer.scheduledTimer(timeInterval: 360.0, target: self, selector: #selector(timerAction2), userInfo: nil, repeats: true)
+        timer2 = Timer.scheduledTimer(timeInterval: 3600.0, target: self, selector: #selector(timerAction2), userInfo: nil, repeats: true)
         
         
         createObjectsAroundCircle()

@@ -23,12 +23,14 @@ class ViewController: UIViewController {
     var timer = Timer()
     var timer1 = Timer()
     var timer2 = Timer()
+    
+    
    
     var second = 0
     var minute = 0
     var hour = 0
     
-   
+    var count = 12
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,10 +53,11 @@ class ViewController: UIViewController {
         
         datePicker.addTarget(self, action: #selector(timeChanged(_:)), for: .valueChanged)
         
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
-        timer1 = Timer.scheduledTimer(timeInterval: 60.0, target: self, selector: #selector(timerAction1), userInfo: nil, repeats: true)
-        timer2 = Timer.scheduledTimer(timeInterval: 3600.0, target: self, selector: #selector(timerAction2), userInfo: nil, repeats: true)
         
+        //timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { _ in
+            self.timerAction()
+        })
         
         createObjectsAroundCircle()
     }
@@ -64,7 +67,7 @@ class ViewController: UIViewController {
         let center = CGPoint(x: simpleClokView.bounds.width/2 ,y: simpleClokView.bounds.height/2)
         
         let radius : CGFloat = 100
-        let count = 12
+       // let count = 12
 
         var angle = CGFloat(2 * Double.pi - Double.pi / 3)
         let step = CGFloat(2 * Double.pi) / CGFloat(count)
@@ -116,17 +119,21 @@ class ViewController: UIViewController {
     @objc func timerAction(){
         second += 1
         movenmetOfThreeHands(count: 60, index: second, handView: nameClockSeconds)
+        if second == 60 {
+            second = 0
+            minute += 1
+            movenmetOfThreeHands(count: 60, index: minute, handView: handClockMinute)
+            
+        }
+        if minute == 60 {
+            minute = 0
+            hour += 1
+            movenmetOfThreeHands(count: 12, index: hour, handView: handClock)
+                
+        }
     }
    
-    @objc func timerAction1(){
-        minute += 1
-        movenmetOfThreeHands(count: 60, index: minute, handView: handClockMinute)
-    }
-   
-    @objc func timerAction2(){
-        hour += 1
-        movenmetOfThreeHands(count: 12, index: hour, handView: handClock)
-    }
+    
 }
 
 
